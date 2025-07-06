@@ -14,7 +14,7 @@
             --progress-bar: #4CAF50;
             --card-bg: rgba(26, 35, 126, 0.85);
         }
-        
+
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             color: var(--text-color);
@@ -22,7 +22,7 @@
             padding: 0;
             overflow-x: hidden;
         }
-        
+
         .bg {
             position: fixed;
             top: 0;
@@ -35,23 +35,21 @@
             background-size: cover;
             z-index: -1;
         }
-        
+
         .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
         }
-        
+
         header {
             text-align: center;
             margin-bottom: 30px;
-            animation: fadeInDown 0.8s ease;
         }
-        
+
         .titlehead {
             background: var(--card-bg);
             border-radius: 10px;
-            color: var(--text-color);
             padding: 15px;
             margin: 10px 0;
             font-size: 1.8rem;
@@ -60,23 +58,21 @@
             backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         .progress-container {
             width: 80%;
             margin: 30px auto;
             background: var(--progress-bg);
             border-radius: 10px;
             height: 30px;
-            position: relative;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        
+
         .progress-bar {
             width: 0%;
             height: 100%;
             background: linear-gradient(90deg, var(--progress-bar), #8BC34A);
-            transition: width 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -84,14 +80,14 @@
             font-weight: bold;
             color: white;
         }
-        
+
         .button-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 15px;
             margin: 25px 0;
         }
-        
+
         .button {
             display: flex;
             align-items: center;
@@ -100,130 +96,58 @@
             color: var(--text-color);
             padding: 12px;
             border-radius: 8px;
-            text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s ease;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             border: none;
             cursor: pointer;
             min-height: 50px;
             text-align: center;
+            text-decoration: none;
         }
-        
+
         .button:hover {
             background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
-        
-        .button i {
-            margin-right: 8px;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin: 25px 0 15px;
-            font-size: 1.3rem;
-            color: var(--accent-color);
-            font-weight: bold;
-        }
-        
-        .advanced-section {
-            margin-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 20px;
-        }
-        
-        .toggle-advanced {
-            display: block;
-            margin: 20px auto;
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-color);
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .toggle-advanced:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        
-        .advanced-buttons {
-            display: none;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-        
+
         .hidden-elements {
             opacity: 0;
             position: absolute;
             pointer-events: none;
         }
-        
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
+
         @media (max-width: 600px) {
             .button-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .progress-container {
                 width: 90%;
             }
-            
+
             .titlehead {
                 font-size: 1.4rem;
             }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body>
-    <div class="bg"></div>
-    
+<body onload="go();" class="bg">
     <div class="container">
         <header>
-            <h1 id="progress" class="titlehead">Ebaid Store - PS4 Jailbreak 7.02</h1>
+            <h1 id="progress" class="titlehead">Loading.. Please Wait !!</h1>
         </header>
-        
+
         <div class="progress-container">
             <div id="myBar" class="progress-bar">0%</div>
         </div>
-        
+
         <main>
-            <div class="section-title">Exploit Options</div>
             <div class="button-grid" id="load">
-                <!-- سيتم ملء هذا القسم عبر JavaScript -->
-            </div>
-            
-            <button class="toggle-advanced" onclick="toggleAdvanced()">
-                <i class="fas fa-cogs"></i> Show Advanced Options
-            </button>
-            
-            <div class="advanced-section">
-                <div class="advanced-buttons" id="advancedButtons">
-                    <div class="section-title">Advanced Tools</div>
-                    <div class="button-grid">
-                        <!-- سيتم ملء هذا القسم عبر JavaScript -->
-                    </div>
-                </div>
+                <!-- يتم تعبئته تلقائيًا -->
             </div>
         </main>
     </div>
-    
-    <!-- العناصر المخفية للوظائف -->
+
+    <!-- عناصر خفية كما في الكود القديم -->
     <input type="hidden" id="pldooe" value=""/>
     <input type="hidden" id="pldooe_full" value=""/>
     <button class="hidden-elements" id="input1" onfocus="handle2()"></button>
@@ -232,127 +156,80 @@
     <select class="hidden-elements" id="select1">
         <option value="value1">Value1</option>
     </select>
-    
+
     <script>
-        // دالة لعرض/إخفاء الأزرار المتقدمة
-        function toggleAdvanced() {
-            var advancedSection = document.getElementById('advancedButtons');
-            var toggleBtn = document.querySelector('.toggle-advanced');
-            
-            if (advancedSection.style.display === 'none' || advancedSection.style.display === '') {
-                advancedSection.style.display = 'grid';
-                toggleBtn.innerHTML = '<i class="fas fa-times"></i> Hide Advanced Options';
-            } else {
-                advancedSection.style.display = 'none';
-                toggleBtn.innerHTML = '<i class="fas fa-cogs"></i> Show Advanced Options';
-            }
-        }
-        
-        // دالة لتحديث شريط التقدم
+        // تحديث شريط التقدم
         function updateProgress(percent) {
-            const progressBar = document.getElementById('myBar');
-            progressBar.style.width = percent + '%';
-            progressBar.textContent = percent + '%';
+            const progressBar = document.getElementById("myBar");
+            progressBar.style.width = percent + "%";
+            progressBar.textContent = percent + "%";
         }
-        
-        // تهيئة الأزرار الأساسية والمتقدمة
-        function initButtons() {
-            const mainButtons = document.querySelector('#load');
-            const advancedButtons = document.querySelector('#advancedButtons .button-grid');
-            
-            // الأزرار الأساسية
-            const essentialButtons = [
-                { icon: 'fa-bomb', text: 'Main Exploit', onclick: 'loadMainExploit()' },
-                { icon: 'fa-rocket', text: 'Fast Exploit', onclick: 'loadFastExploit()' },
-                { icon: 'fa-usb', text: 'App2USB', onclick: 'loadPayload("app2usb")' },
-                { icon: 'fa-ban', text: 'Disable Updates', onclick: 'loadPayload("disableupdates")' }
-            ];
-            
-            // الأزرار المتقدمة
-            const advancedButtonsList = [
-                { icon: 'fa-crown', text: 'GoldHEN', onclick: 'loadPayload("goldhen")' },
-                { icon: 'fa-ghost', text: 'HEN', onclick: 'loadPayload("hen")' },
-                { icon: 'fa-code', text: 'MIRA', onclick: 'loadPayload("mira")' },
-                { icon: 'fa-network-wired', text: 'FTP', onclick: 'loadPayload("ftp")' },
-                { icon: 'fa-save', text: 'Backup', onclick: 'loadPayload("backup")' },
-                { icon: 'fa-undo', text: 'Restore', onclick: 'loadPayload("restore")' },
-                { icon: 'fa-database', text: 'Dumper', onclick: 'loadPayload("dumper")' },
-                { icon: 'fa-microchip', text: 'Kernel Dumper', onclick: 'loadPayload("kerneldumper")' }
-            ];
-            
-            // إضافة الأزرار الأساسية
-            essentialButtons.forEach(btn => {
-                mainButtons.innerHTML += `
-                    <a href="#" class="button" onclick="${btn.onclick}; return false">
-                        <i class="fas ${btn.icon}"></i> ${btn.text}
-                    </a>
-                `;
-            });
-            
-            // إضافة الأزرار المتقدمة
-            advancedButtonsList.forEach(btn => {
-                advancedButtons.innerHTML += `
-                    <a href="#" class="button" onclick="${btn.onclick}; return false">
-                        <i class="fas ${btn.icon}"></i> ${btn.text}
-                    </a>
-                `;
-            });
-        }
-        
-        // تهيئة الصفحة
-        window.onload = function() {
-            initButtons();
-            frame1(); // بدء شريط التقدم
-            
-            // إخفاء الأزرار المتقدمة افتراضيًا
-            document.getElementById('advancedButtons').style.display = 'none';
-        };
-        
-        // وظائف التخزين المؤقت
-        window.applicationCache.ondownloading = function() {
-            document.getElementById("progress").textContent = "Page Caching Started!!";
-            localStorage.is702Cached = false;
-        };
-        
-        window.applicationCache.onprogress = function(a) {
-            const percent = Math.round(100 * (a.loaded / a.total));
-            updateProgress(percent);
-        };
-        
-        window.applicationCache.oncached = function() {
-            document.getElementById("progress").textContent = "Page Cached Successfully!!";
-            localStorage.is702Cached = true;
-            setTimeout(function() {
-                document.getElementById("progress").textContent = "Turn Off the Internet & Reopen the Page to Run the Exploit!!";
-            }, 1500);
-        };
-        
-        // دالة شريط التقدم
+
+        // دالة لتمثيل التحميل اليدوي زي القديم
         var width = 0;
         function frame1() {
             var elem = document.getElementById("myBar");
             var i = 0;
-            var id = setInterval(fra, 10);
-            function fra() {
+            var id = setInterval(function() {
                 if (i < 10 && width < 100) {
                     width++;
                     updateProgress(width);
                 }
                 i++;
-            }
+            }, 10);
         }
-        
-        // وظائف الاختراق (سيتم استبدالها بالوظائف الفعلية)
+
+        // وظائف التخزين المؤقت على PS4
+        window.applicationCache.ondownloading = function () {
+            document.getElementById("progress").textContent = "Page Caching Started!!";
+            localStorage.is702Cached = false;
+        };
+
+        window.applicationCache.onprogress = function (e) {
+            const percent = Math.round(100 * (e.loaded / e.total));
+            updateProgress(percent);
+        };
+
+        window.applicationCache.oncached = function () {
+            document.getElementById("progress").textContent = "Page Cached Successfully!!";
+            localStorage.is702Cached = true;
+            setTimeout(() => {
+                document.getElementById("progress").textContent = "Turn Off the Internet & Reopen the Page to Run the Exploit!!";
+            }, 1500);
+        };
+
+        // تحميل الأزرار الأساسية
+        function initButtons() {
+            const mainButtons = document.querySelector('#load');
+            const essentialButtons = [
+                { icon: '💣', text: 'Main Exploit', onclick: 'loadMainExploit()' },
+                { icon: '🚀', text: 'Fast Exploit', onclick: 'loadFastExploit()' },
+                { icon: '📂', text: 'App2USB', onclick: 'loadPayload("app2usb")' },
+                { icon: '❌', text: 'Disable Updates', onclick: 'loadPayload("disableupdates")' }
+            ];
+
+            essentialButtons.forEach(btn => {
+                mainButtons.innerHTML += `
+                    <a href="#" class="button" onclick="${btn.onclick}; return false">
+                        ${btn.icon} ${btn.text}
+                    </a>
+                `;
+            });
+        }
+
+        // دوال وهمية (تركب مكانها الفعلية)
         function loadMainExploit() { console.log("Loading Main Exploit"); }
         function loadFastExploit() { console.log("Loading Fast Exploit"); }
-        function loadPayload(payload) { console.log("Loading payload:", payload); }
-        function handle2() { console.log("Handle2 function"); }
-        function go() { console.log("Go function"); }
-        
-        // استدعاء دالة go عند تحميل الجسم
-        document.body.onload = go;
+        function loadPayload(name) { console.log("Payload:", name); }
+        function handle2() { console.log("Handle2"); }
+        function go() {
+            console.log("Go()");
+            initButtons();
+            frame1();
+        }
     </script>
-    
+
+    <!-- ملفات السكربتات مثل القديم -->
     <script src="utils.js"></script>
     <script src="int64.js"></script>
     <script src="rop.js"></script>
