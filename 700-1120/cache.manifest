@@ -3,7 +3,7 @@ appcache_manifest_generator.py #248b710a0115c81c56f5620bc8b34b31e30ffbba68535184
 cache.manifest #2e35336305274ce2f4d4ab1193bec29566f79cef8f5feb18e711749233fe9ec2
 index.html #0a66a76be8815caf8fc2c012811b0795bafce86758b89a42915afda6fb930c67
 ../theme.css #56015afb7c421bb4aab672a85c91d503a50556dfbd42c0b336f31ff945db98a9
-# v3.1 centered logo · bigger title dark theme: black background card transparent, bg visible
+# v3.8 gemini bg-noblur-fullwidth-fullwidth-img-cover-onedbg-bgtop-bgbottom-fullstretch
 ../jailbreak.js #3a9f1d0b2fad15b59b5f79c80af0257d623b2fe172dd51bfabc53ab698cab353
 ../logo.png #e830593a34a7f9cdc36867e24bda51815f43e019b4725e0b77048034b7a57173
 ../pggg.jpg #00cfd06f919073c8ac107ac6e12d4c9a2ae26635e674435d5a68539f017708a5
@@ -38,3 +38,6 @@ src/ps4/patches/850.bin #889aeea9e4d4316ca1cbbb49066faac85e90c3b0fc5bbea2126c6ea
 src/ps4/patches/900.bin #1645039fd48ec3f9b4fbbbb92daf7df5faf41e6bb8d815b4a8edb27f35fd9ae4
 src/ps4/patches/903.bin #779a980d04afc6dc89ff6b77af058636904b3559734f9efe3c1d46d20dc14a73
 src/ps4/patches/950.bin #d3d536b07cf9f07d91a18472255f71d83233d6b094628ced474477cd8b912608
+
+NETWORK:
+*

@@ -1,0 +1,22 @@
+CACHE MANIFEST
+# v1.9 gemini bg-noblur-fullwidth-fullwidth-img-cover-onedbg-bgtop-bgbottom-fullstretch
+
+index.html
+cache.html
+../theme.css
+../jailbreak.js
+../logo.png
+../pggg.jpg
+payload.js
+payload.bin
+alert.mjs
+psfree.mjs
+send.mjs
+icon0.png
+icon0.jpg
+
+NETWORK:
+*
+
+FALLBACK:
+index.html index.html

@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# v1.7 centered logo · bigger title dark theme: black background : updated theme
+# v2.4 gemini bg-noblur-fullwidth-fullwidth-img-cover-onedbg-bgtop-bgbottom-fullstretch
  
 index.html
 ../skin.js
@@ -28,3 +28,6 @@ payloads/webrte.js
 payloads/hen.js
 payloads/fanthreshold.js
 payloads/ps4debug.js
+
+NETWORK:
+*

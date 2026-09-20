@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# v1.3 centered logo · bigger title dark theme: black background : updated theme
+# v1.10 gemini bg-noblur-fullwidth-fullwidth-img-cover-onedbg-bgtop-bgbottom-fullstretch
  
 index.html
 ../skin.js
@@ -24,3 +24,6 @@ renamer.js
 backup.js
 restore.js
 dumper.js
+
+NETWORK:
+*
