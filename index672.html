@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html manifest="offlineCache672.manifest">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ebaid Store - PS4 6.72 Jailbreak</title>
+    <link rel="stylesheet" href="theme.css">
+</head>
+<body>
+<div class="bg"></div>
+<div class="brand-bar">
+    <div class="brand-left">
+        <img src="logo.png" alt="Ebaid Store" class="brand-logo">
+        <div>
+            <div class="brand-title">Ebaid Store</div>
+            <div class="brand-sub">PS4 6.72 Jailbreak</div>
+        </div>
+    </div>
+    <a href="index.html" class="brand-home">&larr; Home</a>
+</div>
+<div class="container">
+    <div class="card">
+        <h1 class="page-title">6.72</h1>
+        <p class="sub" style="display:none;">اسأل ارفع الموقع -> اقفل الانترنت -> اضغط الجيلبريك</p>
+        <div id="det" style="display:none;"></div>
+        <div id="state">جاهز</div>
+        <div id="cache"></div>
+        <div class="countdown" id="cd">&nbsp;</div>
+        <button id="jb-btn" class="jb-btn">JAILBREAK - تشغيل التهكير</button>
+    </div>
+</div>
+
+<div id="progress" style="display:none;"></div>
+<span id="success" class="stat-box success" style="display:none;"></span>
+<span id="fail" class="stat-box fail" style="display:none;"></span>
+
+<script src="jailbreak.js"></script>
+<script>
+(function () {
+    var stateEl = document.getElementById("state");
+    var cacheEl = document.getElementById("cache");
+    var btn = document.getElementById("jb-btn");
+    var cdEl = document.getElementById("cd");
+    function setState(t, c) { stateEl.textContent = t; stateEl.className = c || ""; }
+    function setCache(t, ok) { cacheEl.textContent = t; cacheEl.className = ok ? "cacheok" : ""; }
+
+    var detEl = document.getElementById("det");
+    detEl.innerHTML = "فيرموير <b>6.72</b> &middot; متحد مع باقي الصفحات";
+
+    btn.addEventListener("click", function () {
+        btn.disabled = true;
+        setState("ثواني .. التهكير جاي ...", "warn");
+        EbaidJB.running();
+        EbaidJB.countdown(5, function (n) {
+            cdEl.textContent = n === 0 ? "GO" : n;
+        }, function () {
+            setState("بيشغل الاستغلال ...", "warn");
+            try { load_Both(); } catch (e) { EbaidJB.fail("فشل التشغيل"); }
+        });
+    });
+
+    function onProgress() {
+        var t = (document.getElementById("progress").textContent || "").replace(/\s+/g, " ").trim();
+        if (!t) return;
+        if (/Successful|Loaded Successfully|Loaded Succesfully|Already/.test(t)) EbaidJB.done();
+        else if (/Failed|error|Exception/i.test(t)) EbaidJB.fail(t);
+        else if (/Loading|Running|Jailbreak|Cached|caching/i.test(t)) EbaidJB.running("\u23f3 " + t);
+    }
+    try { new MutationObserver(onProgress).observe(document.getElementById("progress"), { childList: true, characterData: true, subtree: true }); } catch (e) {}
+    onProgress();
+
+    var ac = window.applicationCache;
+    if (!ac || !document.documentElement.hasAttribute("manifest")) { setState("اضغط زرار الجيلبريك", "warn"); }
+    else if (!navigator.onLine) { setCache("offline -- من الكاش", true); setState("اضغط زرار الجيلبريك", "warn"); }
+    else if (ac.status === ac.IDLE) { setCache("cached", true); setState("اضغط زرار الجيلبريك", "warn"); }
+    else if (ac.status === ac.UPDATEREADY) { try { ac.swapCache(); } catch (e) {} setCache("update downloaded", true); setState("اضغط زرار الجيلبريك", "warn"); }
+    else {
+        setCache("checking cache...");
+        ac.addEventListener("downloading", function () { setCache("caching for offline (first run)..."); }, false);
+        ac.addEventListener("progress", function (e) { if (e && e.total) setCache("caching " + Math.round((e.loaded / e.total) * 100) + "%"); }, false);
+        ac.addEventListener("cached", function () { setCache("cached for offline use", true); setState("اضغط زرار الجيلبريك", "warn"); }, false);
+        ac.addEventListener("updateready", function () { try { ac.swapCache(); } catch (e) {} setCache("update downloaded", true); setState("اضغط زرار الجيلبريك", "warn"); }, false);
+        ac.addEventListener("noupdate", function () { setCache("cached -- offline ready", true); setState("اضغط زرار الجيلبريك", "warn"); }, false);
+        ac.addEventListener("error", function () { setCache("cache unavailable"); setState("اضغط زرار الجيلبريك", "warn"); }, false);
+    }
+})();
+</script>
+<script>function print(){};</script>
+<script>
+    window.onload = function () {
+        if (localStorage.Fail == null) { localStorage.Fail = 0; localStorage.Success = 0; }
+        document.getElementById("success").textContent = "Success: " + localStorage.Success;
+        document.getElementById("fail").textContent = "Fail: " + localStorage.Fail;
+    };
+</script>
+<script src="common/functions.js"></script>
+<script src="common/exploit.js"></script>
+<script src="jb/jb.js"></script>
+<script src="jb/oldjb.js"></script>
+<script src="payloads/app2usb.js"></script>
+<script src="payloads/backup.js"></script>
+<script src="payloads/preloader.js"></script>
+<script src="payloads/loader.js"></script>
+<script src="payloads/disableupdates.js"></script>
+<script src="payloads/dumper.js"></script>
+<script src="payloads/enableupdates.js"></script>
+<script src="payloads/fanthreshold.js"></script>
+<script src="payloads/ftp.js"></script>
+<script src="payloads/hen.js"></script>
+<script src="payloads/kerneldumper.js"></script>
+<script src="payloads/linuxloader.js"></script>
+<script src="payloads/mirahen.js"></script>
+<script src="payloads/goldhen.js"></script>
+<script src="payloads/miraunofficial.js"></script>
+<script src="payloads/ps4debug.js"></script>
+<script src="payloads/restore.js"></script>
+<script src="payloads/todex.js"></script>
+<script src="payloads/webrte.js"></script>
+<div id="log" style="display:none;"></div>
+</body>
+</html>

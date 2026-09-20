@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html manifest="offlineCache702.manifest">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ebaid Store - PS4 7.02 Jailbreak</title>
+    <link rel="stylesheet" href="theme.css">
+</head>
+<body>
+<div class="bg"></div>
+<div class="brand-bar">
+    <div class="brand-left">
+        <img src="logo.png" alt="Ebaid Store" class="brand-logo">
+        <div>
+            <div class="brand-title">Ebaid Store</div>
+            <div class="brand-sub">PS4 7.02 Jailbreak</div>
+        </div>
+    </div>
+    <a href="index.html" class="brand-home">&larr; Home</a>
+</div>
+<div class="container">
+    <div class="card">
+        <h1 class="page-title">7.02</h1>
+        <p class="sub" style="display:none;">اسأل ارفع الموقع -> اقفل الانترنت -> اضغط الجيلبريك</p>
+        <div id="det" style="display:none;"></div>
+        <div id="state">جاهز</div>
+        <div id="cache"></div>
+        <div class="countdown" id="cd">&nbsp;</div>
+        <button id="jb-btn" class="jb-btn">JAILBREAK - تشغيل التهكير</button>
+    </div>
+</div>
+
+<div id="progress" style="display:none;"></div>
+<div id="myBar" style="display:none;"></div>
+<button style="opacity:0" id="input1" onfocus="handle2()"></button>
+<button style="opacity:0" id="input2"></button>
+<button style="opacity:0" id="input3" onfocus="handle2()"></button>
+<select style="opacity:0" id="select1">
+    <option value="value1">Value1</option>
+</select>
+
+<script src="jailbreak.js"></script>
+<script>
+(function () {
+    var stateEl = document.getElementById("state");
+    var cacheEl = document.getElementById("cache");
+    var btn = document.getElementById("jb-btn");
+    var cdEl = document.getElementById("cd");
+    function setState(t, c) { stateEl.textContent = t; stateEl.className = c || ""; }
+    function setCache(t, ok) { cacheEl.textContent = t; cacheEl.className = ok ? "cacheok" : ""; }
+
+    var detEl = document.getElementById("det");
+    detEl.innerHTML = "فيرموير <b>7.02</b> &middot; متحد مع باقي الصفحات";
+
+    btn.addEventListener("click", function () {
+        btn.disabled = true;
+        setState("ثواني .. التهكير جاي ...", "warn");
+        EbaidJB.running();
+        EbaidJB.countdown(5, function (n) {
+            cdEl.textContent = n === 0 ? "GO" : n;
+        }, function () {
+            setState("بيشغل الاستغلال ...", "warn");
+            try {
+                localStorage.is702Cached = true;
+                go();
+            } catch (e) { EbaidJB.fail("فشل التشغيل"); }
+        });
+    });
+
+    function onProgress() {
+        var t = (document.getElementById("progress").textContent || "").replace(/\s+/g, " ").trim();
+        if (!t) return;
+        if (/Successful|Loaded Successfully|Loaded Succesfully|Already/.test(t)) EbaidJB.done();
+        else if (/Failed|error|Exception/i.test(t)) EbaidJB.fail(t);
+        else if (/Loading|Running|Jailbreak|Cached|caching/i.test(t)) EbaidJB.running("\u23f3 " + t);
+    }
+    try { new MutationObserver(onProgress).observe(document.getElementById("progress"), { childList: true, characterData: true, subtree: true }); } catch (e) {}
+    onProgress();
+
+    var ac = window.applicationCache;
+    if (!ac || !document.documentElement.hasAttribute("manifest")) { setState("اضغط زرار الجيلبريك", "warn"); localStorage.is702Cached = true; }
+    else if (!navigator.onLine) { setCache("offline -- من الكاش", true); setState("اضغط زرار الجيلبريك", "warn"); }
+    else if (ac.status === ac.IDLE) { setCache("cached", true); setState("اضغط زرار الجيلبريك", "warn"); }
+    else if (ac.status === ac.UPDATEREADY) { try { ac.swapCache(); } catch (e) {} setCache("update downloaded", true); setState("اضغط زرار الجيلبريك", "warn"); }
+    else {
+        setCache("checking cache...");
+        ac.addEventListener("downloading", function () { setCache("caching for offline (first run)..."); }, false);
+        ac.addEventListener("progress", function (e) { if (e && e.total) setCache("caching " + Math.round((e.loaded / e.total) * 100) + "%"); }, false);
+        ac.addEventListener("cached", function () { localStorage.is702Cached = true; setCache("cached for offline use", true); setState("اضغط زرار الجيلبريك", "warn"); }, false);
+        ac.addEventListener("updateready", function () { try { ac.swapCache(); } catch (e) {} setCache("update downloaded", true); setState("اضغط زرار الجيلبريك", "warn"); }, false);
+        ac.addEventListener("noupdate", function () { setCache("cached -- offline ready", true); setState("اضغط زرار الجيلبريك", "warn"); }, false);
+        ac.addEventListener("error", function () { setCache("cache unavailable"); setState("اضغط زرار الجيلبريك", "warn"); }, false);
+    }
+})();
+</script>
+<script src="utils.js"></script>
+<script src="int64.js"></script>
+<script src="rop.js"></script>
+<script src="payloads.js"></script>
+<script src="userland.js"></script>
+<script src="ps4.js"></script>
+</body>
+</html>

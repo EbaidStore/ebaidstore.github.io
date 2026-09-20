@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ar" manifest="cache.manifest">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ebaid Store - PS4 7.00 - 11.20 Jailbreak</title>
+  <link rel="stylesheet" href="../theme.css">
+</head>
+<body>
+  <div class="bg"></div>
+
+  <div class="brand-bar">
+    <div class="brand-left">
+      <img src="../logo.png" alt="Ebaid Store" class="brand-logo">
+      <div>
+        <div class="brand-title">Ebaid Store</div>
+        <div class="brand-sub">PS4 7.00 - 11.20 Jailbreak</div>
+      </div>
+    </div>
+    <a href="../index.html" class="brand-home">&larr; Home</a>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <h1 class="page-title">7.00 - 11.20</h1>
+      <div id="state" class="warn">اضغط زرار الجيلبريك</div>
+      <div id="cache"></div>
+      <div class="countdown" id="cd">&nbsp;</div>
+      <p class="sub" id="UA" style="display:none;">جاهز للتشغيل...</p>
+
+      <div class="btn-container">
+        <form id="kernel-options" class="radio-row" style="display:none;">
+          <label for="netctrl-exploit">
+            <input type="radio" name="kernel" id="netctrl-exploit" value="netctrl">
+            NetCtrl
+          </label>
+          <label for="lapse-exploit">
+            <input type="radio" name="kernel" id="lapse-exploit" value="lapse">
+            Lapse
+          </label>
+        </form>
+        <button id="jeilbrek" class="jb-btn">JAILBREAK - تشغيل التهكير</button>
+        <div class="autoJb" style="display:none;">
+          <input id="autoJbInput" type="checkbox">
+          <label for="autoJbInput" id="autoJbLabel">تفعيل تلقائي (Auto Jailbreak)</label>
+        </div>
+      </div>
+
+      <pre id="console" style="display:none;">Ready. Awaiting execution...</pre>
+    </div>
+  </div>
+
+  <script src="../jailbreak.js"></script>
+  <script src="src/main.js"></script>
+  <script src="includes/script.js"></script>
+</body>
+</html>

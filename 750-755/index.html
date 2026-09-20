@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html manifest="offlineCache.manifest">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ebaid Store - PS4 7.50 - 7.55 Jailbreak</title>
+    <link rel="stylesheet" href="../theme.css">
+</head>
+<body>
+<div class="bg"></div>
+<div class="brand-bar">
+    <div class="brand-left">
+        <img src="../logo.png" alt="Ebaid Store" class="brand-logo">
+        <div>
+            <div class="brand-title">Ebaid Store</div>
+            <div class="brand-sub">PS4 7.50 - 7.55 Jailbreak</div>
+        </div>
+    </div>
+    <a href="../index.html" class="brand-home">&larr; Home</a>
+</div>
+<div class="container">
+    <div class="card">
+        <h1 class="page-title">7.50 - 7.55</h1>
+        <p class="sub" style="display:none;">اسأل ارفع الموقع -> اقفل الانترنت -> اضغط الجيلبريك</p>
+        <div id="det" style="display:none;"></div>
+        <div id="state">جاهز</div>
+        <div id="cache"></div>
+        <div class="countdown" id="cd">&nbsp;</div>
+        <button id="jb-btn" class="jb-btn">JAILBREAK - تشغيل التهكير</button>
+    </div>
+</div>
+
+<div id="progress" style="display:none;"></div>
+<button style="opacity:0" id="input1" onfocus="handle2()"></button>
+<button style="opacity:0" id="input2"></button>
+<button style="opacity:0" id="input3" onfocus="handle2()"></button>
+<select style="opacity:0" id="select1">
+    <option value="value1">Value1</option>
+</select>
+<h1 id="myProgress" style="display:none;">
+  <div id="myBar">0%</div>
+</h1>
+<table id="load" align="center" style="display:none;"></table>
+
+<script src="../jailbreak.js"></script>
+<script>
+(function () {
+    var stateEl = document.getElementById("state");
+    var cacheEl = document.getElementById("cache");
+    var btn = document.getElementById("jb-btn");
+    var cdEl = document.getElementById("cd");
+    function setState(t, c) { stateEl.textContent = t; stateEl.className = c || ""; }
+    function setCache(t, ok) { cacheEl.textContent = t; cacheEl.className = ok ? "cacheok" : ""; }
+
+    var detEl = document.getElementById("det");
+    detEl.innerHTML = "فيرموير <b>7.50 - 7.55</b> &middot; متحد مع باقي الصفحات";
+
+    btn.addEventListener("click", function () {
+        btn.disabled = true;
+        setState("ثواني .. التهكير جاي ...", "warn");
+        EbaidJB.running();
+        EbaidJB.countdown(5, function (n) {
+            cdEl.textContent = n === 0 ? "GO" : n;
+        }, function () {
+            setState("بيشغل الاستغلال ...", "warn");
+            try {
+                localStorage.is75XV2Cached = true;
+                go();
+            } catch (e) { EbaidJB.fail("فشل التشغيل"); }
+        });
+    });
+
+    var loadEl = document.getElementById("load");
+    function onLoad() {
+        if (loadEl.innerHTML.length > 20) EbaidJB.done("\u0641\u062a\u062d \u0627\u0644\u0643\u064a\u0631\u0646\u0644 \u0648\u0627\u0644\u062a\u0647\u0643\u064a\u0631 \u062a\u0645!");
+    }
+    try { new MutationObserver(onLoad).observe(loadEl, { childList: true, characterData: true, subtree: true }); } catch (e) {}
+
+    var ac = window.applicationCache;
+    if (!ac || !document.documentElement.hasAttribute("manifest")) { setState("اضغط زرار الجيلبريك", "warn"); }
+    else if (!navigator.onLine) { setCache("offline -- من الكاش", true); setState("اضغط زرار الجيلبريك", "warn"); }
+    else if (ac.status === ac.IDLE) { setCache("cached", true); setState("اضغط زرار الجيلبريك", "warn"); }
+    else if (ac.status === ac.UPDATEREADY) { try { ac.swapCache(); } catch (e) {} setCache("update downloaded", true); setState("اضغط زرار الجيلبريك", "warn"); }
+    else {
+        setCache("checking cache...");
+        ac.addEventListener("downloading", function () { setCache("caching for offline (first run)..."); }, false);
+        ac.addEventListener("progress", function (e) { if (e && e.total) setCache("caching " + Math.round((e.loaded / e.total) * 100) + "%"); }, false);
+        ac.addEventListener("cached", function () { localStorage.is75XV2Cached = true; setCache("cached for offline use", true); setState("اضغط زرار الجيلبريك", "warn"); }, false);
+        ac.addEventListener("updateready", function () { try { ac.swapCache(); } catch (e) {} setCache("update downloaded", true); setState("اضغط زرار الجيلبريك", "warn"); }, false);
+        ac.addEventListener("noupdate", function () { setCache("cached -- offline ready", true); setState("اضغط زرار الجيلبريك", "warn"); }, false);
+        ac.addEventListener("error", function () { setCache("cache unavailable"); setState("اضغط زرار الجيلبريك", "warn"); }, false);
+    }
+})();
+</script>
+<script>
+function print(){}
+if (localStorage.jb == null) { localStorage.jb = 'jb.js'; }
+if (localStorage.autoExploit == null) { localStorage.autoExploit = false; }
+(function () {
+    var scriptCode = '';
+    function preloadScripts(lst) {
+        scriptCode = '';
+        for (var i = 0; i < lst.length; i++) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', lst[i], false);
+            xhr.send('');
+            scriptCode += xhr.responseText + '\n';
+        }
+    }
+    function done() {
+        var p = document.getElementById("myProgress");
+        if (p && p.remove) p.remove();
+        var loadEl = document.getElementById('load');
+        var prog = (document.getElementById("progress").innerHTML || "").toString();
+        if (prog.indexOf("Failed") !== -1) {
+            loadEl.innerHTML = '<tr style="color:white;"><td>&nbsp;</td></tr>';
+            setTimeout(function(){ window.location.reload(); }, 800);
+            return;
+        }
+        loadEl.innerHTML = '<tr style="color:white;"><td>&nbsp;</td></tr>';
+    }
+    window.midExploit = function () {
+        if (localStorage.autoExploit == "true")
+            preloadScripts(['common/exploit.js', 'jb/' + localStorage.jb]);
+        else
+            preloadScripts(['common/exploit.js']);
+    };
+    window.postExploit = function () {
+        setTimeout(function () {
+            eval.call(window, scriptCode);
+            done();
+        }, 100);
+    };
+    window.postPayload = function () {
+        setTimeout(function () {
+            eval.call(window, scriptCode);
+        }, 100);
+    };
+})();
+</script>
+<script src="./webkit/utils.js"></script>
+<script src="./webkit/int64.js"></script>
+<script src="./webkit/ps4.js"></script>
+</body>
+</html>

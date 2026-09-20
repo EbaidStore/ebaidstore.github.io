@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ebaid Store - PS4 9.00 Jailbreak</title>
+    <link rel="stylesheet" href="../theme.css">
+</head>
+<body>
+<div class="bg"></div>
+<div class="brand-bar">
+    <div class="brand-left">
+        <img src="../logo.png" alt="Ebaid Store" class="brand-logo">
+        <div>
+            <div class="brand-title">Ebaid Store</div>
+            <div class="brand-sub">PS4 9.00 Jailbreak</div>
+        </div>
+    </div>
+    <a href="../index.html" class="brand-home">&larr; Home</a>
+</div>
+<div class="container">
+    <div class="card">
+        <h1 class="page-title">9.00</h1>
+        <p class="sub" style="display:none;">اسأل ارفع الموقع -> اقفل الانترنت -> اضغط الجيلبريك</p>
+        <div id="det" style="display:none;"></div>
+        <div id="state">جاهز</div>
+        <div id="cache"></div>
+        <div class="countdown" id="cd">&nbsp;</div>
+        <button id="jb-btn" class="jb-btn">JAILBREAK - تشغيل التهكير</button>
+    </div>
+</div>
+
+<script src="../jailbreak.js"></script>
+<script>
+(function () {
+    var stateEl = document.getElementById("state");
+    var cacheEl = document.getElementById("cache");
+    var btn = document.getElementById("jb-btn");
+    var cdEl = document.getElementById("cd");
+    function setState(t, c) { stateEl.textContent = t; stateEl.className = c || ""; }
+    function setCache(t, ok) { cacheEl.textContent = t; cacheEl.className = ok ? "cacheok" : ""; }
+
+    var detEl = document.getElementById("det");
+    detEl.innerHTML = "فيرموير <b>9.00</b> &middot; متحد مع باقي الصفحات";
+
+    var cons = document.getElementById("console");
+    function log(t) { if (cons) cons.textContent = (cons.textContent + "\n" + t).trim(); }
+
+    btn.addEventListener("click", function () {
+        btn.disabled = true;
+        setState("ثواني .. التهكير جاي ...", "warn");
+        EbaidJB.running();
+        EbaidJB.countdown(5, function (n) {
+            cdEl.textContent = n === 0 ? "GO" : n;
+        }, function () {
+            setState("بيشغل الاستغلال ...", "warn");
+            log("PSFree launch sequence ok");
+            setTimeout(function () { EbaidJB.done("التهكير اشتغل"); }, 1500);
+        });
+    });
+
+    var ac = window.applicationCache;
+    if (!ac || !document.documentElement.hasAttribute("manifest")) { setState("اضغط زرار الجيلبريك", "warn"); }
+    else if (!navigator.onLine) { setCache("offline -- من الكاش", true); setState("اضغط زرار الجيلبريك", "warn"); }
+    else if (ac.status === ac.IDLE) { setCache("cached", true); setState("اضغط زرار الجيلبريك", "warn"); }
+    else if (ac.status === ac.UPDATEREADY) { try { ac.swapCache(); } catch (e) {} setCache("update downloaded", true); setState("اضغط زرار الجيلبريك", "warn"); }
+    else {
+        setCache("checking cache...");
+        ac.addEventListener("downloading", function () { setCache("caching for offline (first run)..."); }, false);
+        ac.addEventListener("progress", function (e) { if (e && e.total) setCache("caching " + Math.round((e.loaded / e.total) * 100) + "%"); }, false);
+        ac.addEventListener("cached", function () { setCache("cached for offline use", true); setState("اضغط زرار الجيلبريك", "warn"); }, false);
+        ac.addEventListener("updateready", function () { try { ac.swapCache(); } catch (e) {} setCache("update downloaded", true); setState("اضغط زرار الجيلبريك", "warn"); }, false);
+        ac.addEventListener("noupdate", function () { setCache("cached -- offline ready", true); setState("اضغط زرار الجيلبريك", "warn"); }, false);
+        ac.addEventListener("error", function () { setCache("cache unavailable"); setState("اضغط زرار الجيلبريك", "warn"); }, false);
+    }
+})();
+</script>
+
+<script>
+    if (window.applicationCache.status === 0) {
+        window.location.replace("cache.html");
+    }
+</script>
+
+<script src="payload.js"></script>
+<script type="module" src="./alert.mjs"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+CACHE MANIFEST
+# v1.7 centered logo · bigger title dark theme: black background : updated theme
+ 
+index.html
+../skin.js
+../logo.png
+../pggg.jpg
+../theme.css
+common/functions.js
+common/exploit.js
+jb/jb.js
+payloads/mira.js
+payloads/mirahen.js
+payloads/miranohb.js
+payloads/miraunofficial.js
+payloads/c-code.js
+payloads/app2usb.js
+payloads/backup.js
+payloads/disableupdates.js
+payloads/dumper.js
+payloads/enableupdates.js
+payloads/ftp.js
+payloads/kerneldumper.js
+payloads/restore.js
+payloads/linuxloader.js
+payloads/todex.js
+payloads/webrte.js
+payloads/hen.js
+payloads/fanthreshold.js
+payloads/ps4debug.js

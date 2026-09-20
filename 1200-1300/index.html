@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ar" manifest="cache.appcache">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ebaid Store - PS4 12.00 - 13.00 Jailbreak</title>
+<link rel="stylesheet" href="../theme.css">
+</head>
+<body>
+<div class="bg"></div>
+<div class="brand-bar">
+  <div class="brand-left">
+    <img src="../logo.png" alt="Ebaid Store" class="brand-logo">
+    <div>
+      <div class="brand-title">Ebaid Store</div>
+      <div class="brand-sub">PS4 12.00 - 13.00 Jailbreak</div>
+    </div>
+  </div>
+  <a href="../index.html" class="brand-home">&larr; Home</a>
+</div>
+<div class="container">
+  <div class="card">
+    <h1 class="page-title">12.00 - 13.00</h1>
+    <p class="sub" style="display:none;">اسأل ارفع الموقع -> اقفل الانترنت -> اضغط الجيلبريك</p>
+    <div id="det" style="display:none;"></div>
+    <div id="state">جاهز</div>
+    <div id="cache"></div>
+    <div class="countdown" id="cd">&nbsp;</div>
+    <button id="jb-btn" class="jb-btn">JAILBREAK - تشغيل التهكير</button>
+  </div>
+</div>
+<script src="../jailbreak.js"></script>
+<script>
+(function () {
+    var stateEl = document.getElementById("state");
+    var detEl = document.getElementById("det");
+    var cacheEl = document.getElementById("cache");
+    var btn = document.getElementById("jb-btn");
+    var cdEl = document.getElementById("cd");
+    function setState(t, c) { stateEl.textContent = t; stateEl.className = c || ""; }
+    function setCache(t, ok) { cacheEl.textContent = t; cacheEl.className = ok ? "cacheok" : ""; }
+    var params = new URLSearchParams(location.search);
+
+    var key = null, fwnum = null;
+    var m = /PlayStation\s+4[\/ ](\d+)\.(\d+)/.exec(navigator.userAgent);
+    if (m) {
+        var minor = parseInt(m[2], 16);
+        var ms = minor.toString(16);
+        if (ms.length < 2) ms = "0" + ms;
+        key = m[1] + "." + ms;
+        fwnum = parseInt(m[1], 10) * 100 + parseInt(ms, 10);
+    }
+    var bug = null, why = "";
+    var forced = params.get("bug");
+    if (forced === "lapse" || forced === "poops") {
+        bug = forced; why = "تفعيل يدوي ?bug=" + forced;
+    } else if (!key) {
+        why = "المتصفح مش PlayStation 4";
+    } else if (fwnum <= 1202) {
+        bug = "lapse"; why = key + " <= 12.02";
+    } else if (fwnum >= 1250) {
+        bug = "poops"; why = key + " >= 12.50";
+    } else {
+        why = key + " -- bug شغال (lapse لحد 12.02 و poops محتاج 12.50)";
+    }
+    detEl.innerHTML = "فيرموير <b>" + (key || "unknown") + "</b>"
+        + " &middot; bug <b>" + (bug || "none") + "</b> &middot; " + why;
+
+    var target = null;
+    function ready() {
+        if (!bug || !target) return;
+        btn.disabled = false;
+        setState("اضغط زرار الجيلبريك", "warn");
+    }
+    if (!bug) {
+        setState("اضغط زرار الجيلبريك", "warn");
+        return;
+    }
+    target = (bug === "lapse" ? "run_lapse.html" : "run_poops.html") + location.search;
+
+    btn.addEventListener("click", function () {
+        if (!target) return;
+        btn.disabled = true;
+        setState("ثواني .. التهكير جاي ...", "warn");
+        EbaidJB.countdown(5, function (n) {
+            cdEl.textContent = n === 0 ? "GO" : n;
+        }, function () {
+            location.replace(target);
+        });
+    });
+
+    var ac = window.applicationCache;
+    if (!ac || !document.documentElement.hasAttribute("manifest")) {
+        ready();
+    } else if (!navigator.onLine) {
+        setCache("offline -- من الكاش", true);
+        ready();
+    } else if (ac.status === ac.IDLE) {
+        setCache("cached", true);
+        ready();
+    } else if (ac.status === ac.UPDATEREADY) {
+        try { ac.swapCache(); } catch (e) {}
+        setCache("update downloaded", true);
+        ready();
+    } else {
+        setCache("checking cache...");
+        ac.addEventListener("downloading",
+            function () { setCache("caching for offline (first run)..."); }, false);
+        ac.addEventListener("progress", function (e) {
+            if (e && e.total)
+                setCache("caching " + Math.round((e.loaded / e.total) * 100) + "%");
+        }, false);
+
+        ac.addEventListener("cached", function () {
+            setCache("cached for offline use", true);
+            ready();
+        }, false);
+        ac.addEventListener("updateready", function () {
+            try { ac.swapCache(); } catch (e) {}
+            setCache("update downloaded", true);
+            ready();
+        }, false);
+
+        ac.addEventListener("noupdate", function () {
+            setCache("cached -- offline ready", true);
+            ready();
+        }, false);
+        ac.addEventListener("error", function () {
+            setCache("cache unavailable");
+            ready();
+        }, false);
+        ac.addEventListener("obsolete", function () {
+            setCache("cache obsolete");
+            ready();
+        }, false);
+    }
+})();
+</script>
+</body>
+</html>
