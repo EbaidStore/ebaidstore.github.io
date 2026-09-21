@@ -29,11 +29,23 @@
     anchor.parentNode.insertBefore(stage, anchor.nextSibling);
     anchor.parentNode.insertBefore(modal, stage.nextSibling);
 
+    var AR_RUN = "\u0627\u0644\u062a\u0647\u0643\u064a\u0631 \u062c\u0627\u0631\u064a .. \u062b\u0648\u0627\u0646\u064a \u0648\u0647\u062a\u0634\u062a\u063a\u0644...";
+    var AR_OK = "\u0627\u0644\u062a\u0647\u0643\u064a\u0631 \u062a\u0645 \u0628\u0646\u062c\u0627\u062d!";
+    var AR_FAIL = "\u0641\u0634\u0644 \u0627\u0644\u062a\u0647\u0643\u064a\u0631";
+
+    // Show a text only when it is friendly (Arabic). Any raw technical/English
+    // log is replaced with the polite Arabic default -- same as 13.52.
+    function hasArabic(s) { return /[\u0600-\u06FF]/.test(s); }
+    function pretty(text, fallback) {
+        if (text == null || text === "" || !hasArabic(text)) return fallback;
+        return text;
+    }
+
     function runStage(text) {
         modal.classList.remove("show");
         clearTimeout(modal._t);
         stage.classList.add("show");
-        stageText.textContent = text || "\u0627\u0644\u062a\u0647\u0643\u064a\u0631 \u062c\u0627\u0631\u064a .. \u062b\u0648\u0627\u0646\u064a \u0648\u0647\u062a\u0634\u062a\u063a\u0644...";
+        stageText.textContent = pretty(text, AR_RUN);
     }
 
     function finish(ok, text) {
@@ -41,9 +53,9 @@
         clearTimeout(modal._t);
         modal.classList.remove("ok", "fail");
         modal.classList.add("show", ok ? "ok" : "fail");
-        title.textContent = text || (ok
-            ? "\u0627\u0644\u062a\u0647\u0643\u064a\u0631 \u062a\u0645 \u0628\u0646\u062c\u0627\u062d!"
-            : "\u0641\u0634\u0644 \u0627\u0644\u062a\u0647\u0643\u064a\u0631");
+        title.textContent = ok
+            ? pretty(text, AR_OK)
+            : pretty(text, AR_FAIL);
         modal._t = setTimeout(function () {
             modal.classList.remove("show");
         }, 10000);
