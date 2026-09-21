@@ -240,7 +240,7 @@ function makeRpc(worker) {
                           : "no firmware key, so no blob name -- stage 9 will not run"));
 
         let payload = null;
-        const PAYLOAD_FILE = params.has("payload") ? params.get("payload") : "payload.bin";
+        const PAYLOAD_FILE = params.has("payload") ? params.get("payload") : "goldhen.bin";
         try {
             const prsp = await fetch(PAYLOAD_FILE);
             if (prsp.ok) payload = new Uint8Array(await prsp.arrayBuffer());
