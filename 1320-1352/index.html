@@ -29,7 +29,6 @@
     <button id="jb-btn" class="jb-btn">JAILBREAK - تشغيل التهكير</button>
   </div>
 </div>
-<div id="msg"></div>
 <script src="../jailbreak.js"></script>
 <script>
 (function () {
@@ -143,22 +142,6 @@
         window.addEventListener("click", fire);
         window.addEventListener("keydown", fire);
     }
-
-    var msgEl = document.getElementById("msg");
-    function onMsg() {
-        if (document.body.classList.contains("done")) {
-            msgEl.textContent = "التهكير تم بنجاح!";
-        } else if (document.body.classList.contains("fail")) {
-            msgEl.textContent = "فشل التهكير";
-        }
-    }
-    try {
-        new MutationObserver(onMsg).observe(document.body, {
-            attributes: true,
-            attributeFilter: ["class"],
-        });
-    } catch (e) {}
-    onMsg();
 })();
 </script>
 </body>
