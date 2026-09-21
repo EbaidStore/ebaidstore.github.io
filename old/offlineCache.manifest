@@ -1,15 +1,15 @@
 CACHE MANIFEST
-# v6.0 dots-ui
+# v6.1 no-pill
  
 CACHE:
-# v6.0 dots-ui
+# v6.1 no-pill
 index.html
 ../skin.js
 ../logo.png
 ../pggg.jpg
 ../theme.css
  
-# v6.0 dots-ui
+# v6.1 no-pill
 functions.js
 exploit.js
 c-code.js
