@@ -27,6 +27,7 @@
     <div id="cache"></div>
     <div class="countdown" id="cd">&nbsp;</div>
     <button id="jb-btn" class="jb-btn">JAILBREAK - تشغيل التهكير</button>
+    <div id="out" style="display:none;"></div>
   </div>
 </div>
 <script src="../jailbreak.js"></script>
@@ -85,7 +86,11 @@
         EbaidJB.countdown(5, function (n) {
             cdEl.textContent = n === 0 ? "GO" : n;
         }, function () {
-            location.replace(target);
+            setState("بيشغل الاستغلال ...", "warn");
+            setTimeout(function () {
+                import((bug === "lapse" ? "./chain_lapse.js" : "./chain_poops.js"))
+                    .catch(function (e) { EbaidJB.fail("فشل التشغيل"); });
+            }, 200);
         });
     });
 
