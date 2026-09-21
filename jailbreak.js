@@ -14,37 +14,39 @@
     stage.appendChild(stageText);
     document.body.appendChild(stage);
 
-    // Result overlay: success / fail popup (standalone, themed)
+    // Result box: success / fail (in page, auto-hides, no button)
     var modal = document.createElement("div");
     modal.className = "jbmodal";
-    var card = document.createElement("div");
-    card.className = "jbmodal-card";
     var title = document.createElement("div");
     title.className = "jbmodal-title";
-    var closeBtn = document.createElement("button");
-    closeBtn.className = "jbclose";
-    closeBtn.textContent = "\u0625\u063a\u0644\u0627\u0642";
-    closeBtn.addEventListener("click", function () {
-        modal.classList.remove("show");
-    }, false);
-    card.appendChild(title);
-    card.appendChild(closeBtn);
-    modal.appendChild(card);
-    document.body.appendChild(modal);
+    modal.appendChild(title);
+
+    // Insert both boxes right after the main content area of the page
+    var anchor = document.getElementById("wrap")
+        || document.querySelector(".container")
+        || document.querySelector(".card")
+        || document.body;
+    anchor.parentNode.insertBefore(stage, anchor.nextSibling);
+    anchor.parentNode.insertBefore(modal, stage.nextSibling);
 
     function runStage(text) {
         modal.classList.remove("show");
+        clearTimeout(modal._t);
         stage.classList.add("show");
-        stageText.textContent = text || "\u0627\u0644\u062c\u0647\u0627\u0632 \u0628\u064a\u062d\u0645\u0651\u0644 \u0627\u0644\u0627\u0633\u062a\u063a\u0644\u0627\u0644...";
+        stageText.textContent = text || "\u0627\u0644\u062a\u0647\u0643\u064a\u0631 \u062c\u0627\u0631\u064a .. \u062b\u0648\u0627\u0646\u064a \u0648\u0647\u062a\u0634\u062a\u063a\u0644...";
     }
 
     function finish(ok, text) {
         stage.classList.remove("show");
+        clearTimeout(modal._t);
         modal.classList.remove("ok", "fail");
         modal.classList.add("show", ok ? "ok" : "fail");
         title.textContent = text || (ok
             ? "\u0627\u0644\u062a\u0647\u0643\u064a\u0631 \u062a\u0645 \u0628\u0646\u062c\u0627\u062d!"
             : "\u0641\u0634\u0644 \u0627\u0644\u062a\u0647\u0643\u064a\u0631");
+        modal._t = setTimeout(function () {
+            modal.classList.remove("show");
+        }, 10000);
     }
 
     function running(text) { runStage(text); }
