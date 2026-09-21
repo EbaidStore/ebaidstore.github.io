@@ -58,6 +58,10 @@
     try {
         new MutationObserver(function () { handleBodyClass(); })
             .observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+        if (document.body) {
+            new MutationObserver(function () { handleBodyClass(); })
+                .observe(document.body, { attributes: true, attributeFilter: ["class"] });
+        }
     } catch (e) { }
     handleBodyClass();
 

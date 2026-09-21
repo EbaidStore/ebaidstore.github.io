@@ -19,14 +19,48 @@
       <a href="../index.html" class="brand-home">&larr; Home</a>
     </div>
     <div id="spin"></div>
-    <div id="msg">Restart your console</div>
+    <div id="msg"></div>
     <div id="wrap">
-      <div id="state">ثواني .. التهكير شغال...</div>
+      <div id="state">اضغط زرار التعديل للبدء</div>
       <div id="out" style="display:none;"></div>
+      <button id="run-btn" class="jb-btn">JAILBREAK - تشغيل التهكير</button>
     </div>
     <script src="../jailbreak.js"></script>
-    <script type="module">
-      import "./jb.js?v=10";
+    <script>
+    (function () {
+        var runBtn = document.getElementById("run-btn");
+        var stateEl = document.getElementById("state");
+        var started = false;
+        function launch() {
+            if (started) return;
+            started = true;
+            runBtn.disabled = true;
+            stateEl.textContent = "ثواني .. التهكير شغال...";
+            import("./jb.js?v=10");
+        }
+        runBtn.addEventListener("click", launch);
+        var msgEl = document.getElementById("msg");
+        function onClass() {
+            if (document.body.classList.contains("done")) {
+                msgEl.textContent = "التهكير تم بنجاح!";
+            } else if (document.body.classList.contains("fail")) {
+                msgEl.textContent = "فشل التهكير";
+            }
+        }
+        try {
+            new MutationObserver(onClass).observe(document.body, {
+                attributes: true,
+                attributeFilter: ["class"],
+            });
+        } catch (e) {}
+        onClass();
+        var auto = false;
+        try {
+            auto = window.sessionStorage.getItem("ebaidrun") === "1";
+            window.sessionStorage.removeItem("ebaidrun");
+        } catch (e) {}
+        if (auto) { launch(); } else { stateEl.textContent = "اضغط زرار التعديل للبدء"; }
+    })();
     </script>
   </body>
 </html>

@@ -1,11 +1,9 @@
-let timerId = null; 
+let timerId = null;
 const label = document.getElementById('autoJbLabel');
 const checkbox = document.getElementById('autoJbInput');
 const jeilbrekBtn = document.getElementById('jeilbrek');
 const UAElement = document.getElementById("UA");
-
-const storedAutoJb = localStorage.getItem("autoJb");
-let autoJbValue = storedAutoJb !== null ? storedAutoJb === "true" : true;
+const countdownEl = document.getElementById("cd");
 
 // choose one of kernel exploits
 var exploitChain = localStorage.getItem("exploitChain") || "lapse";
@@ -21,22 +19,12 @@ kexForm.addEventListener("change", function (event) {
     exploitChain = event.target.value;
 });
 
-// jailbreak execution
+// jailbreak execution with manual countdown
 jeilbrekBtn.addEventListener("click", function (e){
+    if (jeilbrekBtn.disabled) return;
     jeilbrekBtn.disabled = true;
-    jeilbrekBtn.textContent = "⏳ ثواني.. التهكير شغال...";
-    stopInterval();
-    doJb();
-});
-
-checkbox.addEventListener('change', function () {
-    localStorage.setItem("autoJb", checkbox.checked);
-    if (checkbox.checked == true && jeilbrekBtn.disabled == false) {
-        jailbreakCountdown();
-        return;
-    }
-
-    stopInterval();
+    jeilbrekBtn.textContent = "ثواني .. التهكير شغال...";
+    runCountdown();
 });
 
 function stopInterval(){
@@ -44,26 +32,22 @@ function stopInterval(){
         clearInterval(timerId);
         timerId = null;
     }
-    label.textContent = "تفعيل تلقائي (Auto Jailbreak)";
 }
 
-function jailbreakCountdown() {   
+function runCountdown() {
     stopInterval();
-
     let countdown = 5;
-    label.textContent = `⏳ ثواني.. جاري التفعيل خلال: ${countdown}`;
+    countdownEl.textContent = countdown;
     timerId = setInterval(() => {
         countdown--;
-        label.textContent = `⏳ ثواني.. جاري التفعيل خلال: ${countdown}`;
-
-        if (countdown < 0) {
-            jeilbrekBtn.disabled = true;
-            jeilbrekBtn.textContent = "⏳ ثواني.. التهكير شغال...";
+        if (countdown <= 0) {
+            countdownEl.textContent = "GO";
             clearInterval(timerId);
             timerId = null;
-            label.textContent = '⏳ جاري التشغيل...';
             doJb();
+            return;
         }
+        countdownEl.textContent = countdown;
     }, 1000);
 }
 
@@ -97,9 +81,4 @@ document.addEventListener("DOMContentLoaded", function() {
     } else {
         lapseRadio.checked = true;
     }
-
-    // apply autojb localStorage value
-    checkbox.checked = autoJbValue;
-
-    if (autoJbValue) jailbreakCountdown();
 });

@@ -1,15 +1,15 @@
 CACHE MANIFEST
-# v1.10 gemini bg-noblur-fullwidth-fullwidth-img-cover-onedbg-bgtop-bgbottom-fullstretch
+# v5.4 verified
  
 CACHE:
-# pages
+# v5.4 verified
 index.html
 ../skin.js
 ../logo.png
 ../pggg.jpg
 ../theme.css
  
-# scripts
+# v5.4 verified
 functions.js
 exploit.js
 c-code.js

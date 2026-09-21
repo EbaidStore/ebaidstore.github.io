@@ -29,6 +29,7 @@
     <button id="jb-btn" class="jb-btn">JAILBREAK - تشغيل التهكير</button>
   </div>
 </div>
+<div id="msg"></div>
 <script src="../jailbreak.js"></script>
 <script>
 (function () {
@@ -67,7 +68,10 @@
         EbaidJB.countdown(5, function (n) {
             cdEl.textContent = n === 0 ? "GO" : n;
         }, function () {
-            location.replace(target);
+            setState("بيشغل الاستغلال ...", "warn");
+            setTimeout(function () {
+                import("./jb.js?v=10");
+            }, 200);
         });
     });
 
@@ -139,6 +143,22 @@
         window.addEventListener("click", fire);
         window.addEventListener("keydown", fire);
     }
+
+    var msgEl = document.getElementById("msg");
+    function onMsg() {
+        if (document.body.classList.contains("done")) {
+            msgEl.textContent = "التهكير تم بنجاح!";
+        } else if (document.body.classList.contains("fail")) {
+            msgEl.textContent = "فشل التهكير";
+        }
+    }
+    try {
+        new MutationObserver(onMsg).observe(document.body, {
+            attributes: true,
+            attributeFilter: ["class"],
+        });
+    } catch (e) {}
+    onMsg();
 })();
 </script>
 </body>
