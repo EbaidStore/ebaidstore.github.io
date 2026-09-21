@@ -163,7 +163,7 @@ let allDone = false;
             ? "blob=" + kpatchName + " bytes=" + kpatch.length
               + " sites=" + KPATCH_JMP_SITES.length
             : "blob=" + kpatchName + " MISSING");
-        const PAYLOAD_FILE = params.has("payload") ? params.get("payload") : "goldhen.bin";
+        const PAYLOAD_FILE = params.has("payload") ? params.get("payload") : "payload.bin";
         try {
             const r = await fetch(PAYLOAD_FILE);
             if (r.ok) payload = new Uint8Array(await r.arrayBuffer());
