@@ -109,12 +109,19 @@
         var DONE_RE = /ALL DONE|ROOT|REPAIRED|NO REBOOT|KERNEL R\/W|SUCCESS|\u0627\u0634\u062a\u063a\u0644|\u0646\u062c\u0627\u062d/i;
         var FAIL_RE = /FAILED|no commit|UNSUPPORTED|missing|does not|did not|cache failed|\u0641\u0634\u0644/i;
         var RUN_RE = /working|loading|running|\.\.\.|\u0634\u063a\u0627\u0644|\u062c\u0627\u0631\u064a|\u062c\u0627\u0631\u0649|\u0628\u064a\u0634\u063a\u0644|\u062b\u0648\u0627\u0646\u064a|\u0628\u064a\u062d\u0645\u0651\u0644/i;
+        function setStateText(v, fallback) {
+            var clean = pretty(v, fallback);
+            if (stateEl.textContent !== clean) stateEl.textContent = clean;
+        }
         function handleState() {
             var t = (stateEl.textContent || "").replace(/\s+/g, " ").trim();
             if (!t) return;
-            if (DONE_RE.test(t)) { done(); return; }
-            if (FAIL_RE.test(t)) { fail(t); return; }
-            if (RUN_RE.test(t)) { runStage(t); }
+            if (DONE_RE.test(t)) { setStateText(t, AR_OK); done(); return; }
+            if (FAIL_RE.test(t)) { setStateText(t, AR_FAIL); fail(t); return; }
+            if (RUN_RE.test(t)) {
+                if (!hasArabic(t)) setStateText(t, AR_RUN);
+                runStage(t);
+            }
         }
         try {
             new MutationObserver(handleState)
