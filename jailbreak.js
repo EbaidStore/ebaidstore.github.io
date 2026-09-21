@@ -41,7 +41,10 @@
         return text;
     }
 
+    var startedFlag = false;
+
     function runStage(text) {
+        startedFlag = true;
         modal.classList.remove("show");
         clearTimeout(modal._t);
         stage.classList.add("show");
@@ -49,6 +52,7 @@
     }
 
     function finish(ok, text) {
+        startedFlag = true;
         stage.classList.remove("show");
         clearTimeout(modal._t);
         modal.classList.remove("ok", "fail");
@@ -154,4 +158,19 @@
         } catch (e) { }
         handleBtn();
     }
+
+    // AppCache auto-takeover: whenever a freshly updated cache becomes
+    // available, swap to it and reload once -- no more "visit twice". It is
+    // only allowed before the run starts, so it can never interrupt an
+    // exploit in progress.
+    (function () {
+        var docEl = document.documentElement;
+        var ac = window.applicationCache;
+        if (!ac || !docEl || !docEl.hasAttribute("manifest")) return;
+        ac.addEventListener("updateready", function () {
+            try { ac.swapCache(); } catch (e) { }
+            if (startedFlag) return;
+            try { location.reload(); } catch (e) { }
+        }, false);
+    })();
 })();
