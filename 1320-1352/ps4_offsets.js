@@ -535,7 +535,7 @@ PS4["13.50"] = {
   k_prison0: 0x1a5c0c0,
   k_rootvnode: 0x2136e90,
   kpatch: "1350.bin", // BUILT (anchored in kernel_1350.elf); kpatch.js 10/10, both neg controls refuse; UNTESTED on hw
-  payload: "payload2.bin", // PS4-HEN, works through 13.52 (raw13g)
+payload: "goldhen13.2..13.50.bin", // SiSTRo GoldHEN 13.02-13.50 (user-provided); ?payload=payload2.bin to revert
 };
 
 PS4["13.52"] = Object.assign({}, PS4["13.50"], {
@@ -590,11 +590,11 @@ PS4["13.02"] = Object.assign({}, PS4["13.00"], {
   k_prison0: 0x1a5c0c0,
   k_rootvnode: 0x2136e90,
   kpatch: "1302.bin", // ported from 1300.c, 18 sites +0x10; HW-PROVEN on 13.02 (KEXEC rc=0, pass=51)
-payload: "payload2.bin", // PS4-HEN, works through 13.52 (raw13g)
+payload: "goldhen13.2..13.50.bin", // SiSTRo GoldHEN 13.02-13.50 (user-provided)
   fw_status:
     "state=663-JB+KPATCH-PROVEN-on-hw-pass=51 shares=13.00 (webkit+libkernel, PRIMITIVE-OK) " +
     "kernel_rvas=MEASURED-from-kernel_1302.elf (16/16 GO) same-kernel-as=13.04 " +
-    "kpatch=1302.bin-HW-PROVEN-KEXEC-rc0 payload=payload2.bin-PS4HEN(works<=13.52) bug=663",
+    "kpatch=1302.bin-HW-PROVEN-KEXEC-rc0 payload=goldhen13.2..13.50.bin(13.02-13.50) bug=663",
 });
 
 PS4["13.04"] = Object.assign({}, PS4["13.00"], {
@@ -617,11 +617,11 @@ PS4["13.04"] = Object.assign({}, PS4["13.00"], {
   k_prison0: 0x1a5c0c0,
   k_rootvnode: 0x2136e90,
   kpatch: "1302.bin", // SAME kernel as 13.02 -> reuses the one blob (HW-PROVEN on 13.02)
-payload: "payload2.bin", // PS4-HEN, works through 13.52 (raw13g)
+payload: "goldhen13.2..13.50.bin", // SiSTRo GoldHEN 13.02-13.50 (user-provided)
 fw_status:
     "state=663-JB+KPATCH-via-13.02(pass=51) shares=13.00 (webkit+libkernel, PRIMITIVE-OK) " +
     "kernel_rvas=SAME-KERNEL-AS-13.02 (measured from kernel_1302.elf, 16/16 GO) " +
-    "kpatch=1302.bin-shared-HW-PROVEN payload=payload2.bin-PS4HEN(works<=13.52) bug=663",
+    "kpatch=1302.bin-shared-HW-PROVEN payload=goldhen13.2..13.50.bin(13.02-13.50) bug=663",
 });
 
 PS4["12.02"] = Object.assign({}, PS4["12.00"], {
