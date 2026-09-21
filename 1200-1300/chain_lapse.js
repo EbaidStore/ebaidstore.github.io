@@ -253,7 +253,7 @@ function makeRpc(worker) {
                                        : " entry=NOT-e9")
             : "NOT LOADED -- stage 10 will not run");
 
-        const ITERS = params.has("iters") ? parseInt(params.get("iters"), 10) : 400;
+        const ITERS = params.has("iters") ? parseInt(params.get("iters"), 10) : 500;
         const SPRAY_NUM = params.has("spray")
             ? parseInt(params.get("spray"), 10) : 0x200;
 
@@ -908,7 +908,7 @@ function makeRpc(worker) {
             ? parseInt(params.get("yields"), 10) : 64;
 
         const ATTEMPTS = params.has("attempts")
-            ? parseInt(params.get("attempts"), 10) : 20;
+            ? parseInt(params.get("attempts"), 10) : 28;
 
         const MAX_MISFIRES = params.has("misfires")
             ? parseInt(params.get("misfires"), 10) : 3;

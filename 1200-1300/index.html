@@ -79,7 +79,7 @@
     }
     target = (bug === "lapse" ? "run_lapse.html" : "run_poops.html") + location.search;
 
-    btn.addEventListener("click", function () {
+    function start() {
         if (!target) return;
         btn.disabled = true;
         setState("ثواني .. التهكير جاي ...", "warn");
@@ -92,7 +92,14 @@
                     .catch(function (e) { EbaidJB.fail("فشل التشغيل"); });
             }, 200);
         });
-    });
+    }
+    btn.addEventListener("click", start);
+    window.JBAutoRun = start;
+    try {
+        if ((parseInt(sessionStorage.getItem("JB_ATTEMPT"), 10) || 0) > 0) {
+            setTimeout(start, 800);
+        }
+    } catch (e) { }
 
     var ac = window.applicationCache;
     if (!ac || !document.documentElement.hasAttribute("manifest")) {

@@ -85,6 +85,32 @@
         }
     };
 
+    // Auto-retry on failure (only on pages that expose window.JBAutoRun).
+    // Bounded reload+restart loop so the final success rate climbs toward
+    // 90-99%: a lost round simply reloads the page and tries again.
+    var JB_MAX_RETRY = 3;
+    var retryScheduled = false;
+    function retryCount() {
+        try { return parseInt(sessionStorage.getItem("JB_ATTEMPT"), 10) || 0; }
+        catch (e) { return 0; }
+    }
+    function retrySave(n) {
+        try { sessionStorage.setItem("JB_ATTEMPT", String(n)); } catch (e) { }
+    }
+    function retryClear() {
+        try { sessionStorage.removeItem("JB_ATTEMPT"); } catch (e) { }
+    }
+    function scheduleRetry() {
+        if (retryScheduled) return;
+        if (!window.JBAutoRun) { retryClear(); finish(false, null); return; }
+        retryScheduled = true;
+        var attempt = retryCount() + 1;
+        if (attempt > JB_MAX_RETRY) { retryClear(); finish(false, null); return; }
+        retrySave(attempt);
+        finish(false, "\u0641\u0634\u0644 .. \u062c\u0627\u0631\u064a \u0625\u0639\u0627\u062f\u0629 \u0627\u0644\u0645\u062d\u0627\u0648\u0644\u0629 \u062a\u0644\u0642\u0627\u0626\u064a\u0627\u064b (\u0645\u062d\u0627\u0648\u0644\u0629 " + attempt + " \u0645\u0646 " + (JB_MAX_RETRY + 1) + ") ...");
+        setTimeout(function () { location.reload(); }, 5000);
+    }
+
     var body = document.body;
 
     // raw13g: body class done / fail / log
@@ -116,8 +142,8 @@
         function handleState() {
             var t = (stateEl.textContent || "").replace(/\s+/g, " ").trim();
             if (!t) return;
-            if (DONE_RE.test(t)) { setStateText(t, AR_OK); done(); return; }
-            if (FAIL_RE.test(t)) { setStateText(t, AR_FAIL); fail(t); return; }
+            if (DONE_RE.test(t)) { retryClear(); setStateText(t, AR_OK); done(); return; }
+            if (FAIL_RE.test(t)) { setStateText(t, AR_FAIL); scheduleRetry(); return; }
             if (RUN_RE.test(t)) {
                 if (!hasArabic(t)) setStateText(t, AR_RUN);
                 runStage(t);

@@ -127,7 +127,7 @@ let allDone = false;
         const NUM_IOV_WORKER = params.has("iov")
             ? parseInt(params.get("iov"), 10) : 4;
         const NUM_ATTEMPT = params.has("attempts")
-            ? parseInt(params.get("attempts"), 10) : 8;
+            ? parseInt(params.get("attempts"), 10) : 12;
         const NUM_IOV_SPRAY = params.has("spray")
             ? parseInt(params.get("spray"), 10) : 0x100;
         const { key, off } = offsetsFor(navigator.userAgent);
