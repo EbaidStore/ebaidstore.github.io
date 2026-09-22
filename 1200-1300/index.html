@@ -81,6 +81,8 @@
 
     function start() {
         if (!target) return;
+        window.EbaidPayload = (bug === "poops" && fwnum < 1300)
+            ? "goldhen12..50.bin" : "payload.bin";
         btn.disabled = true;
         setState("ثواني .. التهكير جاي ...", "warn");
         EbaidJB.countdown(5, function (n) {
