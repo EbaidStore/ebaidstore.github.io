@@ -1,0 +1,20 @@
+CACHE MANIFEST
+# v1.0 g2all-style
+
+index.html
+theme.css
+jailbreak.js
+logo.png
+pggg.jpg
+900/index.html
+900/cache.html
+900/payload.js
+900/payload.bin
+900/alert.mjs
+900/psfree.mjs
+900/send.mjs
+900/icon0.png
+900/icon0.jpg
+
+NETWORK:
+*

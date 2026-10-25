@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html manifest="cache1320.manifest">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ebaid Store - Installing Cache (13.20-13.52)</title>
+    <link rel="stylesheet" href="theme.css">
+</head>
+<body>
+<div class="bg"></div>
+<div class="brand-bar">
+    <div class="brand-left">
+        <img src="logo.png" alt="Ebaid Store" class="brand-logo">
+        <div>
+            <div class="brand-title">Ebaid Store</div>
+            <div class="brand-sub">Installing Cache - FW 13.20 - 13.52</div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="card">
+        <h1 class="page-title">13.20 - 13.52</h1>
+        <h1 id="msgs" class="sub">Starting Cache Installation ...</h1>
+    </div>
+</div>
+<script>
+history.replaceState(null,null,'index.html');var histlength=history.length;history.go(-histlength);
+function DLProgress(e){var p=Math.round(e.loaded/e.total*100);msgs.innerHTML="Installing Offline Cache: "+p+"%";}
+function DisplayCacheProgress(){msgs.innerHTML="Cache Installed Successfully \u2714";setTimeout(function(){msgs.innerHTML="Now Close And Re-Open Your Browser ...";},1500);}
+window.applicationCache.addEventListener("progress",DLProgress,false);
+window.applicationCache.oncached=function(e){DisplayCacheProgress();};
+window.applicationCache.onupdateready=function(e){DisplayCacheProgress();};
+window.applicationCache.onerror=function(e){msgs.innerHTML="Error Installing Cache! - Clear and Re-Open Your Browser ...";};
+</script>
+</body>
+</html>

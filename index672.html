@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html manifest="offlineCache672.manifest">
+<html>
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,6 +58,10 @@
             try { load_Both(); } catch (e) { EbaidJB.fail("فشل التشغيل"); }
         });
     });
+
+    if (location.search.indexOf("auto=1") !== -1) {
+        setTimeout(function () { if (!btn.disabled) btn.click(); }, 800);
+    }
 
     function onProgress() {
         var t = (document.getElementById("progress").textContent || "").replace(/\s+/g, " ").trim();

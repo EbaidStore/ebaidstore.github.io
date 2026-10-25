@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" manifest="cache.appcache">
+<html lang="ar">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -73,6 +73,10 @@
             }, 200);
         });
     });
+
+    if (location.search.indexOf("auto=1") !== -1) {
+        setTimeout(function () { if (!btn.disabled) btn.click(); }, 1200);
+    }
 
     function ready() {
         if (!target) return;

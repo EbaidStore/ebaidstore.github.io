@@ -1,0 +1,25 @@
+CACHE MANIFEST
+# v1.0 g2all-style
+
+index.html
+theme.css
+jailbreak.js
+logo.png
+pggg.jpg
+1320-1352/index.html
+1320-1352/jb.html
+1320-1352/jb.js
+1320-1352/core.js
+1320-1352/mem.js
+1320-1352/int64.js
+1320-1352/ps4_offsets.js
+1320-1352/rpc_worker.js
+1320-1352/goldhen.bin
+1320-1352/goldhen13.2..13.50.bin
+1320-1352/payload2.bin
+1320-1352/patches/1302.bin
+1320-1352/patches/1350.bin
+1320-1352/patches/1352.bin
+
+NETWORK:
+*

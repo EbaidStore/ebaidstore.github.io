@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" manifest="cache.manifest">
+<html lang="ar">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,5 +49,13 @@
   <script src="../jailbreak.js"></script>
   <script src="src/main.js"></script>
   <script src="includes/script.js"></script>
+  <script>
+  if (location.search.indexOf("auto=1") !== -1) {
+      setTimeout(function () {
+          var b = document.getElementById("jeilbrek");
+          if (b && !b.disabled) b.click();
+      }, 1200);
+  }
+  </script>
 </body>
 </html>

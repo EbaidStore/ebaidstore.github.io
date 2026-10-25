@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" manifest="cache.manifest">
+<html lang="ar">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,6 +59,10 @@
         });
     });
 
+    if (location.search.indexOf("auto=1") !== -1) {
+        setTimeout(function () { if (!btn.disabled) btn.click(); }, 800);
+    }
+
     var ac = window.applicationCache;
     if (!ac || !document.documentElement.hasAttribute("manifest")) { setState("اضغط زرار الجيلبريك", "warn"); }
     else if (!navigator.onLine) { setCache("offline -- من الكاش", true); setState("اضغط زرار الجيلبريك", "warn"); }
@@ -74,12 +78,6 @@
         ac.addEventListener("error", function () { setCache("cache unavailable"); setState("اضغط زرار الجيلبريك", "warn"); }, false);
     }
 })();
-</script>
-
-<script>
-    if (window.applicationCache.status === 0) {
-        window.location.replace("cache.html");
-    }
 </script>
 
 <script src="payload.js"></script>
