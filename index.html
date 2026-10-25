@@ -13,7 +13,7 @@
             <img src="logo.png" alt="Ebaid Store" class="brand-logo">
             <div>
                 <div class="brand-title">Ebaid Store</div>
-                <div class="brand-sub">PS4 Jailbreak Host</div>
+                <div class="brand-sub">PS4 Jailbreak Host [5.05 - 13.52]</div>
             </div>
         </div>
     </div>
@@ -22,7 +22,9 @@
         <main>
             <div class="card">
                 <h1 class="page-title">Ebaid Store</h1>
-                <h1 id="msgs" class="sub">جاري تحميل جولد هن ... انتظر شوية</h1>
+                <h1 id="msgs" class="sub">جاري تحويلك إلى GoldHEN Multi FW ...</h1>
+                <br>
+                <a href="g2all/index.html" class="jb-btn" style="display:inline-block; text-decoration:none; text-align:center; padding:12px 20px;">دخول الهوست الموحد (5.05 - 13.52)</a>
             </div>
         </main>
     </div>
@@ -31,59 +33,13 @@
     var uaFull = navigator.userAgent;
     var match = uaFull.match(/PlayStation 4[ /]([\d.]+)/i);
     var isPS4 = match !== null;
-    var fwVersion = isPS4 ? match[1] : "Unknown";
-    var fwNum = parseFloat(fwVersion);
 
-    function onScriptError() {
-        msgs.innerHTML = "المحتوى مش موجود! - امسح بيانات المتصفح و ثبت الكاش تاني ...";
-    }
-
-    if (!isPS4) {
-        document.addEventListener("DOMContentLoaded", () => {
-            msgs.innerHTML = "الموقع ده مخصوص لبلايستيشن 4 - الفيرموير المدعوم من 6.72 لـ 13.52";
-        });
+    if (isPS4) {
+        window.location.replace("g2all/index.html");
     } else {
-        if (window.applicationCache.status == '0') {
-            if (fwNum == 6.72) {
-                window.location.replace("cache672.html");
-            } else if (fwNum >= 7.00 && fwNum <= 7.02) {
-                window.location.replace("cache702.html");
-            } else if (fwNum >= 7.50 && fwNum <= 7.55) {
-                window.location.replace("cache755.html");
-            } else if (fwNum >= 9.00 && fwNum <= 9.60) {
-                window.location.replace("cache900.html");
-            } else if (fwNum >= 7.00 && fwNum <= 11.20) {
-                window.location.replace("cache700.html");
-            } else if (fwNum >= 12.00 && fwNum <= 13.00) {
-                window.location.replace("cache1200.html");
-            } else if (fwNum >= 13.20 && fwNum <= 13.52) {
-                window.location.replace("cache1320.html");
-            } else {
-                document.addEventListener("DOMContentLoaded", () => {
-                    msgs.innerHTML = 'فيرموير غير مدعوم: <span style="color: red;">' + fwVersion + '</span>';
-                });
-            }
-        } else {
-            if (fwNum == 6.72) {
-                window.location.replace("index672.html?auto=1");
-            } else if (fwNum >= 7.00 && fwNum <= 7.02) {
-                window.location.replace("index702.html?auto=1");
-            } else if (fwNum >= 7.50 && fwNum <= 7.55) {
-                window.location.replace("750-755/index.html?auto=1");
-            } else if (fwNum >= 9.00 && fwNum <= 9.60) {
-                window.location.replace("900/index.html?auto=1");
-            } else if (fwNum >= 7.00 && fwNum <= 11.20) {
-                window.location.replace("700-1120/index.html?auto=1");
-            } else if (fwNum >= 12.00 && fwNum <= 13.00) {
-                window.location.replace("1200-1300/index.html?auto=1");
-            } else if (fwNum >= 13.20 && fwNum <= 13.52) {
-                window.location.replace("1320-1352/index.html?auto=1");
-            } else {
-                document.addEventListener("DOMContentLoaded", () => {
-                    msgs.innerHTML = 'فيرموير غير مدعوم: <span style="color: red;">' + fwVersion + '</span>';
-                });
-            }
-        }
+        document.addEventListener("DOMContentLoaded", () => {
+            msgs.innerHTML = "هوست عبيد ستور الشامل يدعم جميع تحديثات PS4 من 5.05 إلى 13.52 مع تثبيت الكاش التلقائي.";
+        });
     }
     </script>
 </body>
